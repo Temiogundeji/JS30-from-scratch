@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Javascript Drumkit</title>
+</head>
+<body>
+    <div class="container">
+        <div class="keys">
+            <div class="key-row">
+                <div data-key="65" class="key">
+                    <kbd>A</kbd>
+                    <span class="bit">CLAP</span>
+                </div>
+                <div data-key="83" class="key">
+                    <kbd>S</kbd>
+                    <span class="bit">HIHAT</span>
+                </div>
+                <div data-key="68" class="key">
+                    <kbd>D</kbd>
+                    <span class="bit">KICK</span>
+                </div>
+            </div>
+            <div class="key-row">
+                <div data-key="70" class="key">
+                    <kbd>F</kbd>
+                    <span class="bit">OPENHAT</span>
+                </div>
+                <div data-key="71" class="key">
+                    <kbd>G</kbd>
+                    <span class="bit">BOOM</span>
+                </div>
+                <div data-key="72" class="key">
+                    <kbd>H</kbd>
+                    <span class="bit">RIDE</span>
+                </div>
+            </div>
+            <div class="key-row">
+                <div data-key="74" class="key">
+                    <kbd>J</kbd>
+                    <span class="bit">SNARE</span>
+                </div>
+                <div data-key="75" class="key">
+                        <kbd>K</kbd>
+                        <span class="bit">TOM</span>
+                </div>
+                <div data-key="76" class="key">
+                        <kbd>L</kbd>
+                        <span class="bit">TINK</span>
+                </div>
+            </div>
+        </div>
+        <audio data-key="65" src="music/clap.wav"></audio>
+        <audio data-key="83" src="music/hihat.wav"></audio>
+        <audio data-key="68" src="music/kick.wav"></audio>
+        <audio data-key="70" src="music/openhat.wav"></audio>
+        <audio data-key="71" src="music/boom.wav"></audio>
+        <audio data-key="72" src="music/ride.wav"></audio>
+        <audio data-key="74" src="music/snare.wav"></audio>
+        <audio data-key="75" src="music/tom.wav"></audio>
+        <audio data-key="76" src="music/tink.wav"></audio>
+    </div>
+    <footer>Design by Yusuff Ogundeji &#169; 2019.</footer>
+    <style>
+        body{
+            box-sizing: border-box;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-size:14px;
+            display:flex;
+            flex-direction:column;
+            justify-content: center;
+            align-items:center;
+            height:100vh;
+            overflow:hidden;
+        }
+        .container{
+            display: flex;
+            flex-direction:column;
+            /* align-items:space-between; */
+            background-color: #fff;
+            box-shadow: 0 6px 16px 0 rgba(0,0,0,.2);
+            width:80vh;
+            border-top:5px solid rgb(224, 79, 12);
+        }
+        .container div.key-row{
+            display:flex;
+            flex-direction:row;
+            justify-content: space-around;
+        }
+        .container div.key-row div.key{
+            display:flex;
+            flex-direction:column;
+            padding:50px;
+        }
+        .container div.key-row div.key kbd{
+            font-size:32px;
+            color:rgb(224, 79, 12);
+        }
+        footer{
+            margin-top:20px;
+        }
+        .playing{
+           transform: scale(1.1);
+           color:0 6px 16px 0 rgba(224, 79, 12,.2);
+        }
+    </style>
+    <script>
+        //Get all the keys
+        const keys = document.querySelectorAll('div.key');
+        let keyArray = Array.from(keys);
+                function playSound(){
+            //Iterate through all keys
+            keyArray.forEach(function(key){
+                // get the value of each key
+            console.log(key);
+            let keyVal =  key.getAttribute('data-key');
+            console.log(keyVal);
+                let audio = document.querySelector(`audio[data-key="${keyVal}"]`);
+                if(!audio) return;
+                key.classList.add('playing');
+                audio.currentTime = 0;
+                audio.play();           
+        });
+    }          
+window.addEventListener('keydown', playSound);
+
+    </script>
+</body>
+</html>
